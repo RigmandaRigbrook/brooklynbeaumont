@@ -1,6 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <link href="extracted_assets/index_asset_9.png" rel="icon" sizes="32x32" type="image/png">
   <title>Loading…</title>
   
    <style>
@@ -28,7 +29,7 @@
 	  background-repeat: no-repeat;
 	  background-size: cover;
 	  background-attachment: fixed;
-}
+     }
 
     #video {
       position: fixed;
@@ -42,17 +43,23 @@
       object-fit: contain;
       z-index: 1;
     }
+	
+	#title {
+	  position: fixed;
+	  top: 20%;
+	  width: 100%;
+	  text-align: center;
+	  z-index: 2;
+	}
 
-    #title {
-      position: fixed;
-      top: 20%;
-      width: 100%;
-      text-align: center;
-      font-size: 3rem;
-      opacity: 0;
-      animation: fadeTitle 6s ease-in-out forwards;
-      z-index: 2;
-    }
+	#title h1 {
+	  opacity: 0;
+	}
+
+	#title.start h1 {
+	  animation: fadeTitle 6s ease-in-out 1s forwards;
+	}
+
 
     @keyframes fadeTitle {
       0% { opacity: 0; }
@@ -89,6 +96,11 @@
 
   <script>
     const video = document.getElementById('video');
+	
+	// NEW: trigger title fade-in when video actually starts playing
+    video.addEventListener('play', () => {
+      document.getElementById('title').classList.add('start');
+    });
 
     // Force autoplay
     video.muted = true;
@@ -108,7 +120,7 @@
       document.body.style.opacity = "0";
       setTimeout(() => {
         window.location.href = "home.html";
-      }, 1000);
+      }, 50);
     }
   </script>
 </body>
